@@ -120,18 +120,30 @@ const myCar = new Car('toyota', 30);
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
 }
+
+Baby.prototype = Object.create(Person.prototype);
+// basic syntax for object inherit parent prototype
+Baby.prototype.play = function(){
+    return `Playing with ${this.favoriteToy}`;
+}
+
+const bob = new Baby('Bob', 1, 'Stuffed Bear');
+bob.play();
+console.log('lasttask', bob.play());
+// remember to invoke .play function / not console.log('lasttask', bob.play);
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. window binding - when in the global scope, the value of "this" will be the window/console object
+  2. implicit binding - whenever a function is called by a preceding dot, the object left of the dot gets "this"
+  3. new binding - whenever a constructor function is used, "this" refers to the specific instance of the object that is created and returned by the constructor function *(when a function is invoked as a constructor function using the new keyword 'this' points to the newly created object)*
+  4. explicit binding - whenever Javascripts .call or .apply method is used, "this" is explicitly defined
 */
 
 
